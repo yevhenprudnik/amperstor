@@ -1,8 +1,7 @@
 {
-  "name": "electro-shop",
+  "name": "amperstor",
   "version": "1.0.0",
   "type": "module",
-  "description": "Coursework",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
