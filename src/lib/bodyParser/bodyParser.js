@@ -10,7 +10,7 @@ export const bodyParser = {
       return JSON.parse(data);
     } catch (err) {
       throw apiError.badRequest(
-        `Failed to parse args${err instanceof Error ? ': ' + err.message : ''}.`
+        `Failed to parse args${err instanceof Error ? ': ' + err.message : ''}.`,
       );
     }
   },

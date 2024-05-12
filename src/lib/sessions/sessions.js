@@ -15,10 +15,10 @@ export const sessions = {
     };
 
     const encodedHeader = Buffer.from(JSON.stringify(header)).toString(
-      'base64'
+      'base64',
     );
     const encodedPayload = Buffer.from(JSON.stringify(payload)).toString(
-      'base64'
+      'base64',
     );
 
     const signatureInput = `${encodedHeader}.${encodedPayload}`;
@@ -43,7 +43,7 @@ export const sessions = {
     if (signature !== expectedSignature) apiError.unauthorized();
 
     const decodedPayload = JSON.parse(
-      Buffer.from(encodedPayload, 'base64').toString()
+      Buffer.from(encodedPayload, 'base64').toString(),
     );
 
     return decodedPayload;
