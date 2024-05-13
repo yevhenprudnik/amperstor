@@ -34,6 +34,11 @@ const init = ({ services }) =>
         headers,
       });
 
+      if (method === 'OPTIONS') {
+        res.writeHead(204, DEFAULT_HEADERS);
+        return res.end();
+      }
+
       if (method !== 'GET') Object.assign(args, await bodyParser.parse(req));
       const result = await handle(session, args);
       res.writeHead(200, DEFAULT_HEADERS);
