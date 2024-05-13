@@ -4,8 +4,6 @@ import { createServer } from 'node:http';
 import { ApiError as IApiError, apiError } from '../exceptions/apiError.js';
 import { bodyParser } from '../bodyParser/bodyParser.js';
 
-/** @type {DefaultSession} */
-export const DEFAULT_SESSION = { user: {}, token: '' };
 export const DEFAULT_HEADERS = {
   'X-XSS-Protection': '1; mode=block',
   'X-Content-Type-Options': 'nosniff',
@@ -31,10 +29,7 @@ const init = ({ services }) =>
       const args = {};
       if (id) args.id = id;
 
-      const session =
-        access !== 'none'
-          ? await services.auth.verify.handle(DEFAULT_SESSION, { headers })
-          : DEFAULT_SESSION;
+      const session = await services.auth.verify.handle(access, { headers });
 
       if (method !== 'GET') Object.assign(args, await bodyParser.parse(req));
       const result = await handle(session, args);

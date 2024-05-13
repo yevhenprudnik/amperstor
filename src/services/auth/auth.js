@@ -26,18 +26,21 @@ export const init = ({ userRepo }) => ({
     private: true,
     handle: async (_, params) => {
       try {
-        const { headers } = params;
+        const { headers, access } = params;
+        if (access === 'none') return { user: {}, token: '' };
+
         const token = headers.authorization;
         if (!token) throw apiError.unauthorized('No token provided.');
         const payload = sessions.validate(token);
         if (!payload?.id) throw apiError.unauthorized('Invalid token payload.');
         const user = await userRepo.findOne({ id: payload.id });
         if (!user) throw apiError.unauthorized('User not found.');
+        if (user.role !== access) throw apiError.forbidden();
 
         return { user, token };
       } catch (err) {
         if (err instanceof IApiError) throw err;
-        console.log('resolveSession error', err);
+        console.log('Resolve Session error', err);
         throw apiError.unauthorized();
       }
     },

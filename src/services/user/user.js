@@ -5,7 +5,7 @@ import { sessions } from '../../lib/sessions/sessions.js';
 /** @type {import('./types.d.ts').init} */
 export const init = ({ userRepo }) => ({
   create: {
-    access: 'none',
+    access: 'admin',
     handle: async (_, params) => {
       const { email, username, password } = params;
 
