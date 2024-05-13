@@ -24,6 +24,11 @@ const init = ({ services }) =>
       const [domain, action, id] = url.substring(1).split('/');
       const handler = services[domain]?.[action];
 
+      if (method === 'OPTIONS') {
+        res.writeHead(204, DEFAULT_HEADERS);
+        return res.end();
+      }
+
       if (!handler || handler.private) throw apiError.notFound();
       const { handle, access } = handler;
       const args = {};
@@ -33,11 +38,6 @@ const init = ({ services }) =>
         access,
         headers,
       });
-
-      if (method === 'OPTIONS') {
-        res.writeHead(204, DEFAULT_HEADERS);
-        return res.end();
-      }
 
       if (method !== 'GET') Object.assign(args, await bodyParser.parse(req));
       const result = await handle(session, args);
