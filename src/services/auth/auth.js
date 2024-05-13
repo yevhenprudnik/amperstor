@@ -21,6 +21,28 @@ export const init = ({ userRepo }) => ({
     },
   },
 
+  signUp: {
+    access: 'none',
+    handle: async (_, params) => {
+      const { email, username, password } = params;
+
+      const candidateByEmail = await userRepo.findOne({ email });
+      if (candidateByEmail) throw apiError.badRequest('Email already taken.');
+      const candidateByUsername = await userRepo.findOne({ username });
+      if (candidateByUsername)
+        throw apiError.badRequest('Username already taken.');
+
+      const hashed = passwords.hash(password);
+      const user = await userRepo.create({
+        email,
+        username,
+        password: hashed,
+      });
+
+      return sessions.generate(user);
+    },
+  },
+
   verify: {
     access: 'none',
     private: true,

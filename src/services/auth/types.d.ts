@@ -8,6 +8,10 @@ interface Deps {
 
 interface AuthService extends Record<string, Handler> {
   signIn: Handler<{ email: string; password: string }, Promise<Session>>;
+  signUp: Handler<
+    { email: string; username: string; password: string },
+    Promise<Session>
+  >;
   verify: Handler<
     { headers: IncomingHttpHeaders; access: 'none' | 'common' | 'admin' },
     Promise<Session>
