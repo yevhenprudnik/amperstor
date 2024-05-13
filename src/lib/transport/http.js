@@ -10,7 +10,7 @@ export const DEFAULT_HEADERS = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubdomains; preload',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Include Authorization header
   'Content-Type': 'application/json; charset=UTF-8',
 };
 
