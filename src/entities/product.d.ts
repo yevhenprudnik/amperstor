@@ -7,5 +7,5 @@ export interface Product {
   count: number;
   categories: Category[];
   description: string;
-  image?: string;
+  media?: string[];
 }

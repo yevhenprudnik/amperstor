@@ -11,7 +11,29 @@ interface Deps {
 interface ProductService extends Record<string, Handler> {
   getAll: Handler<{}, Promise<Product[]>>;
   getById: Handler<{ id: number }, Promise<Product>>;
+  getByTitle: Handler<{ title: string }, Promise<Product[]>>;
   getByCategory: Handler<{ id: number }, Promise<Product[]>>;
+  create: Handler<
+    {
+      title: string;
+      price: number;
+      count: number;
+      description: string;
+      media: string[];
+    },
+    Promise<Product>
+  >;
+  update: Handler<
+    {
+      id: number;
+      title: string;
+      price: number;
+      count: number;
+      description: string;
+      media: string[];
+    },
+    Promise<Product>
+  >;
 }
 
 export function init(deps: Deps): ProductService;

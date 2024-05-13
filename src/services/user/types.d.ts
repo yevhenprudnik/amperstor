@@ -7,6 +7,10 @@ interface Deps {
 }
 
 interface UserService extends Record<string, Handler> {
+  getAll: Handler<{}, Promise<User[]>>;
+  getById: Handler<{ id: number }, Promise<User>>;
+  getByUsername: Handler<{ username: string }, Promise<User[]>>;
+  getByDiscount: Handler<{ min: number; max: number }, Promise<User[]>>;
   create: Handler<
     {
       email: string;

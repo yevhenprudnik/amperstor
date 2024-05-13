@@ -29,7 +29,10 @@ const init = ({ services }) =>
       const args = {};
       if (id) args.id = id;
 
-      const session = await services.auth.verify.handle(access, { headers });
+      const session = await services.auth.verify.handle(null, {
+        access,
+        headers,
+      });
 
       if (method !== 'GET') Object.assign(args, await bodyParser.parse(req));
       const result = await handle(session, args);
