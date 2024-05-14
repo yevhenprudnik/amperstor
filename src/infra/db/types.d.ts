@@ -10,6 +10,8 @@ export interface Repository<Entity> {
   remove(id: number): Promise<boolean>;
 }
 
-export type db = (table: 'user' | 'product' | 'category') => Repository<any>;
+export type db = (
+  table: 'user' | 'product' | 'category' | 'order',
+) => Repository<any>;
 
 export function init(pool: Pool): db;

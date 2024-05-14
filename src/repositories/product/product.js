@@ -1,5 +1,4 @@
 /** @type {import('./types').init} */
-
 export const init = (db) => {
   const productRepo = db('product');
 

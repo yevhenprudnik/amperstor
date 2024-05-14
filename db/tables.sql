@@ -22,3 +22,9 @@ CREATE TABLE "product_category" (
   "product_id" INT REFERENCES "product"("id"),
   "category_id" INT REFERENCES "category"("id")
 );
+CREATE TABLE "order" (
+  "id" SERIAL PRIMARY KEY,
+  "user_id" INT REFERENCES "user"("id"),
+  "product_id" INT REFERENCES "product"("id"),
+  "order_date" DATE DEFAULT CURRENT_DATE
+);
