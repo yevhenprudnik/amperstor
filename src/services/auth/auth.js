@@ -35,7 +35,8 @@ export const init = ({ userRepo }) => ({
         if (!payload?.id) throw apiError.unauthorized('Invalid token payload.');
         const user = await userRepo.findOne({ id: payload.id });
         if (!user) throw apiError.unauthorized('User not found.');
-        if (user.role !== access) throw apiError.forbidden();
+        if (user.role !== 'admin' && user.role !== access)
+          throw apiError.forbidden();
 
         return { user, token };
       } catch (err) {
