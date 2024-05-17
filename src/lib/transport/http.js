@@ -10,7 +10,7 @@ export const DEFAULT_HEADERS = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubdomains; preload',
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   'Content-Type': 'application/json; charset=UTF-8',
 };
 
@@ -20,17 +20,20 @@ const init = ({ services }) =>
     try {
       const { url, headers, method } = req;
       if (!url) throw apiError.notFound();
-
       const [domain, action, id] = url.substring(1).split('/');
       const handler = services[domain]?.[action];
-
+      if (method === 'OPTIONS') {
+        res.writeHead(204, DEFAULT_HEADERS);
+        return res.end();
+      }
       if (!handler || handler.private) throw apiError.notFound();
       const { handle, access } = handler;
       const args = {};
       if (id) args.id = id;
-
-      const session = await services.auth.verify.handle(access, { headers });
-
+      const session = await services.auth.verify.handle(null, {
+        access,
+        headers,
+      });
       if (method !== 'GET') Object.assign(args, await bodyParser.parse(req));
       const result = await handle(session, args);
       res.writeHead(200, DEFAULT_HEADERS);
