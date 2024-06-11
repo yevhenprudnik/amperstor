@@ -6,7 +6,7 @@ export const config = {
   db: {
     host: '127.0.0.1',
     port: 5432,
-    database: 'electro_shop',
+    database: 'amperstor',
     user: 'postgres',
     password: 'postgres',
   },

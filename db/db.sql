@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS electro_shop;
-CREATE DATABASE electro_shop OWNER postgres;
+DROP DATABASE IF EXISTS amperstor;
+CREATE DATABASE amperstor OWNER postgres;
