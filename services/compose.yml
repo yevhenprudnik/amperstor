@@ -1,0 +1,55 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: amperstor
+      POSTGRES_PASSWORD: amperstor
+      POSTGRES_DB: amperstor
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  auth:
+    build:
+      context: ./auth
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    volumes:
+      - ./auth:/usr/src/app
+
+  user:
+    build:
+      context: ./user
+    ports:
+      - "8001:8001"
+    expose:
+      - 8001
+    volumes:
+      - ./user:/usr/src/app
+
+  product:
+    build:
+      context: ./product
+    ports:
+      - "8002:8002"
+    expose:
+      - 8002
+    volumes:
+      - ./product:/usr/src/app
+
+  category:
+    build:
+      context: ./category
+    ports:
+      - "8003:8003"
+    expose:
+      - 8003
+    volumes:
+      - ./category:/usr/src/app
+
+volumes:
+  pgdata:
