@@ -17,7 +17,7 @@ export const init = ({ db }) => ({
     return db.create({ ...user, password });
   },
 
-  update: async (id, { email, username }) => {
+  update: async (id, { email, username, role }) => {
     if (email) {
       const emailExist = await db.findByEmail(email);
       if (emailExist)
@@ -30,6 +30,6 @@ export const init = ({ db }) => ({
         throw apiError.badRequest('User with such email already exist.');
     }
 
-    return db.update(id, { email, username });
+    return db.update(id, { email, username, role });
   },
 });

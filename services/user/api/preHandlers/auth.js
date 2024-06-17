@@ -5,7 +5,7 @@ export const authPreHandler = async (request, response) => {
   try {
     const { authorization } = request.headers;
     if (!authorization) throw apiError.unauthorized('No token provided');
-    const res = await fetch('http://auth-service:8000/verify', {
+    const res = await fetch('http://auth:8000/verify', {
       headers: { authorization },
     });
 

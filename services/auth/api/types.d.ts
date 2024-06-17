@@ -1,5 +1,5 @@
-import { Service } from '../service/types';
-import { Server } from '../server/types';
+import { Service } from '../service/types.d.ts';
+import { Server } from '../server/types.d.ts';
 
 interface Deps {
   server: Server;

@@ -41,6 +41,11 @@ export const init = ({ pgPool }) => ({
       params.push(user.email);
     }
 
+    if (user.role) {
+      set.push(`"role" = $${params.length + 1}`);
+      params.push(user.role);
+    }
+
     const query = `
       UPDATE "user"
       SET ${set.join(', ')}

@@ -1,5 +1,5 @@
-import { Session, User } from '../types.js';
-import { Db } from '../db/types.js';
+import { User } from '../types.d.ts';
+import { Db } from '../db/types.d.ts';
 
 interface Deps {
   db: Db;
@@ -12,7 +12,7 @@ export interface Service {
   ): Promise<User>;
   update(
     id: number,
-    user: Partial<Pick<User, 'email' | 'username'>>,
+    user: Partial<Pick<User, 'email' | 'username' | 'role'>>,
   ): Promise<User>;
 }
 

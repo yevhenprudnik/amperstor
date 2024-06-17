@@ -30,9 +30,9 @@ export const init = ({ server, service }) => {
     async (request, response) => {
       if (!request.user) throw apiError.unauthorized();
       const { id } = request.user;
-      const { email, username } = request.body;
+      const { email, username, role } = request.body;
 
-      return service.update(id, { email, username });
+      return service.update(id, { email, username, role });
     },
   );
 };

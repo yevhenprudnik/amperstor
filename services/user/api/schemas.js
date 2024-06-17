@@ -18,6 +18,7 @@ export const updateSchema = /** @type {const} */ ({
     properties: {
       email: { type: 'string' },
       username: { type: 'string' },
+      role: { type: 'string', enum: ['admin', 'common'] },
     },
   },
 });
